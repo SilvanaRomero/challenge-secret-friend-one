@@ -4,21 +4,24 @@ friendList = [];
 function friendAdd(){
     
     let friend = document.getElementById('friend').value.trim();
-    console.log(friend);
 
-    // Verificar que no ingrese una cadena vacia
+    // Verificar que no ingrese una cadena vacia o numero
 
     if ( (friend === '') || ( !isNaN(friend))){
 
         // Si ingresa una cadena vacia vuelve a pedir el nombre
 
-        alert("Nombre incorrecto. Por favor, ingrese el nombre de un amigo: ");
+        alert("Nombre incorrecto. Por favor, ingrese el nombre:");
+        cleanDisplay();
+        document.getElementById('friend').focus(); // Pone el cursor de forma automatica para escribir
+        
 
     } else {
 
         friendList.push(friend);
         cleanDisplay();
-        printFriends(document.getElementById('friend-list'));
+        updateFriendList(document.getElementById('friend-list'));
+        document.getElementById('friend').focus(); // Pone el cursor de forma automatica para escribir
 
     }
 
@@ -29,7 +32,7 @@ function cleanDisplay(){
 }
 
 // funcion para mostrar los nombres en la lista arriba del boton sorteo
-function printFriends(element){
+function updateFriendList(element){
     /* Recibe un elemento del DOM html, lo limpia y recorre la lista de amigos, por cada amigo
     se agrega un elemento <li> */
 
@@ -39,5 +42,23 @@ function printFriends(element){
         let li = document.createElement("li");
         li.textContent = friendList[i];
         element.appendChild(li);
+    }
+}
+
+
+function raffleFriend(){
+    /* Recibir por parametro la lista de amigos
+    y elegir un amigo al azar */
+
+    if (friendList.length === 0){
+
+        alert("No hay amigos para sortear");
+    } else {
+
+    let position = Math.floor( Math.random() * friendList.length);
+    let selectedFriend = friendList[position];
+    console.log(document.getElementById('result'));
+    document.getElementById("result").innerHTML =`<li> Amigo sorteado es: ${selectedFriend}</li>`
+    
     }
 }
