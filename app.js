@@ -58,6 +58,7 @@ function raffleFriend(){
     let position = Math.floor( Math.random() * friendList.length);
     let selectedFriend = friendList[position];
     console.log(document.getElementById('result'));
+    document.getElementById('friend-list').innerHTML = '';
     document.getElementById("result").innerHTML =`<li> Amigo sorteado es: ${selectedFriend}</li>`
     
     }
